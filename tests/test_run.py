@@ -1,5 +1,5 @@
-import pyTemplate.run
+import pyTemplateBath.run
 import pytest
 
 def test_run():
-    assert pyTemplate.run.main()
+    assert pyTemplateBath.run.main()

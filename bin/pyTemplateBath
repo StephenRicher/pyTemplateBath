@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+
+""" Command line executable to run pyTemplateBath """
+
+import pyTemplateBath.main
+import sys
+
+if __name__ == '__main__':
+    sys.exit(pyTemplateBath.main.main())

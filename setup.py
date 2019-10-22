@@ -18,13 +18,13 @@ setup(
     author = 'Stephen Richer',
     author_email = 'sr467@bath.ac.uk',
     url = 'https://github.com/StephenRicher/pyTemplate',
+    scripts = ['bin/pyTemplateBath'],
     python_requires = '>=3.3.0',
     install_requires = [],
-    scripts = [],
     setup_requires = ['pytest-runner'],
     tests_require = ['pytest'],
     license = 'MIT',
-    classifiers=[
+    classifiers = [
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Science/Research',

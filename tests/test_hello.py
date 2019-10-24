@@ -6,4 +6,4 @@ def test_run():
     assert pyTemplateBath.hello.hello_world()
 
 def test_install_requires():
-	assert hasattr(pyCommonTools.logging.create_logger, '__call__')
+    assert hasattr(pyCommonTools.logging.create_logger, '__call__')

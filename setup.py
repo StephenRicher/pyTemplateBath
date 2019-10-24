@@ -21,8 +21,6 @@ setup(
     scripts = ['bin/pyTemplateBath'],
     python_requires = '>=3.3.0',
     install_requires = ['pyCommonTools'],
-    setup_requires = ['pytest-runner'],
-    tests_require = ['pytest'],
     license = 'MIT',
     classifiers = [
         'Development Status :: 3 - Alpha',

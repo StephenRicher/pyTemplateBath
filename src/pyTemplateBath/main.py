@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import pyTemplateBath.hello
+import pyCommonTools.logging
 import sys, argparse
 
 def main():
@@ -54,6 +55,11 @@ def main():
     except AttributeError:
         parser.print_help()
         sys.exit()
+    
+    log = pyCommonTools.logging.create_logger()
+    pyCommonTools.logging.initiliase_logger(
+        log_output = args.log,
+        log_level = logging.DEBUG if args.verbose else None)
     
     args_dict = vars(args)
 

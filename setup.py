@@ -20,7 +20,7 @@ setup(
     url = 'https://github.com/StephenRicher/pyTemplate',
     scripts = ['bin/pyTemplateBath'],
     python_requires = '>=3.3.0',
-    install_requires = [],
+    install_requires = ['pyCommonTools'],
     setup_requires = ['pytest-runner'],
     tests_require = ['pytest'],
     license = 'MIT',

@@ -3,6 +3,5 @@
 """ Print Hello World."""
 
 def hello_world(name = 'World'):
-    import pyCommonTools
     print(f'Hello {name}.')
     return True

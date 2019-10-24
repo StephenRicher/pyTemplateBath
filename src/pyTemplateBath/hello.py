@@ -4,4 +4,3 @@
 
 def hello_world(name = 'World'):
     print(f'Hello {name}.')
-    return True

@@ -14,4 +14,4 @@ __version__ = '.'.join([
 ])
 
 if _VERSION_SUFFIX:
-  __version__ = f'{__version__}-{_VERSION_SUFFIX}'
+    __version__ = f'{__version__}-{_VERSION_SUFFIX}'

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+""" Basic command line tool for Hello World. """
+
 import pyTemplateBath.hello
 import pyCommonTools as pct
 import sys
@@ -19,14 +21,14 @@ def main():
         formatter_class=formatter_class,
         epilog=epilog)
 
-    subparsers, base_args = pct.set_subparser(parser)
+    subparsers, base_parser = pct.set_subparser(parser)
 
     # Sub-parser
     sub_parser = subparsers.add_parser(
         'hello',
         description=pyTemplateBath.hello.__doc__,
         help='Classic Hello World program.',
-        parents=[base_args],
+        parents=[base_parser],
         formatter_class=formatter_class,
         epilog=epilog)
     sub_parser.add_argument(
@@ -34,21 +36,4 @@ def main():
         help='Provide name.')
     sub_parser.set_defaults(function=pyTemplateBath.hello.hello_world)
 
-    args = parser.parse_args()
-
-    log = pct.create_logger(
-        initialise=True,
-        output=args.log,
-        level=logging.DEBUG if args.verbose else None)
-
-    try:
-        func = args.function
-    except AttributeError:
-        parser.print_help()
-        sys.exit()
-
-    args_dict = vars(args)
-
-    [args_dict.pop(key) for key in ['command', 'function', 'verbose', 'log']]
-
-    return func(**vars(args))
+    return (pct.execute(parser))

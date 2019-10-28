@@ -2,7 +2,7 @@
 
 """ Command line executable to run pyTemplateBath """
 
-import pyTemplateBath.main
+import pyTemplateBath
 import sys
 
 if __name__ == '__main__':

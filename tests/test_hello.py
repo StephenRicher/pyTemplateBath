@@ -1,6 +1,6 @@
-import pyTemplateBath as tb
-from pyCommonTools import datadir
 import pytest
+import pyTemplateBath as tb
+import pyCommonTools as pct
 
 
 def test_hello_world(capsys):
@@ -11,11 +11,11 @@ def test_hello_world(capsys):
     captured = capsys.readouterr()
     assert captured.out == "Hello World.\n"
 
-def test_data(datadir):
+def test_data(pct.datadir):
     
     """ Compare line by line, with expected data file. """
     
-    expected_data = datadir.join('test.dat')
+    expected_data = pct.datadir.join('test.dat')
     with open(expected_data) as f:
         for line in ['line1', 'line2']:
             assert f.readline().strip('\n') == line

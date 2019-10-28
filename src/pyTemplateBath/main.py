@@ -2,7 +2,7 @@
 
 """ Basic command line tool for Hello World. """
 
-import pyTemplateBath.hello
+import pyTemplateBath as tb
 import pyCommonTools as pct
 import sys
 import argparse
@@ -26,7 +26,7 @@ def main():
     # Sub-parser
     sub_parser = subparsers.add_parser(
         'hello',
-        description=pyTemplateBath.hello.__doc__,
+        description=tb.hello.__doc__,
         help='Classic Hello World program.',
         parents=[base_parser],
         formatter_class=formatter_class,
@@ -34,6 +34,6 @@ def main():
     sub_parser.add_argument(
         '-n', '--name', default='World',
         help='Provide name.')
-    sub_parser.set_defaults(function=pyTemplateBath.hello.hello_world)
+    sub_parser.set_defaults(function=tb.hello.hello_world)
 
     return (pct.execute(parser))

@@ -12,9 +12,13 @@ import sys
 import os
 
 
-def read(fname):
+def read(fname, byline = False):
     with open(os.path.join(os.path.dirname(__file__), fname)) as f:
-        return f.read()
+        if byline:
+            contents = f.read().splitlines()
+        else:
+            contents = f.read()
+        return contents
 
 
 def get_info():
@@ -69,7 +73,7 @@ setup(
     url = 'https://github.com/StephenRicher/pyTemplate',
     scripts = ['bin/pyTemplateBath'],
     python_requires = '>=3.6.0',
-    install_requires = ['pyCommonTools>=1.0'],
+    install_requires = read('requirements.txt', byline = True),
     license = 'MIT',
     classifiers = [
         'Development Status :: 3 - Alpha',

@@ -29,6 +29,7 @@ class UploadCommand(Command):
 
     description = 'Build and publish the package.'
     user_options = []
+    version = get_info()['__version__']
 
     @staticmethod
     def status(s):
@@ -55,7 +56,7 @@ class UploadCommand(Command):
         os.system('twine upload dist/*')
 
         self.status('Pushing git tags…')
-        os.system(f'git tag -a v{get_info()['__version__']}')
+        os.system(f'git tag -a v{version}')
         os.system('git push --tags')
 
         sys.exit()

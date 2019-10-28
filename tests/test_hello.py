@@ -1,13 +1,13 @@
-import pyTemplateBath.hello
+import pyTemplateBath as tb
+import pyCommonTools as pct
 import pytest
-import pyCommonTools.logging
-from pyCommonTools.testing import datadir
+from pyCommonTools import datadir
 
 def test_hello_world(capsys):
     
     """ Compare stdout with expected value. """
     
-    pyTemplateBath.hello.hello_world()
+    tb.hello.hello_world()
     captured = capsys.readouterr()
     assert captured.out == "Hello World.\n"
 

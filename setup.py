@@ -29,7 +29,6 @@ class UploadCommand(Command):
 
     description = 'Build and publish the package.'
     user_options = []
-    version = get_info()['__version__']
 
     @staticmethod
     def status(s):
@@ -42,7 +41,7 @@ class UploadCommand(Command):
     def finalize_options(self):
         pass
 
-    def run(self, version = version):
+    def run(self):
         try:
             self.status('Removing previous builds…')
             rmtree(os.path.join(os.path.dirname(__file__), 'dist'))
@@ -56,36 +55,36 @@ class UploadCommand(Command):
         os.system('twine upload dist/*')
 
         self.status('Pushing git tags…')
-        os.system(f'git tag -a v{version}')
+        os.system(f'git tag -a v{get_info()['__version__']}')
         os.system('git push --tags')
 
         sys.exit()
 
 
 setup(
-    name = 'pyTemplateBath',
-    author = 'Stephen Richer',
-    author_email = 'sr467@bath.ac.uk',
-    url = 'https://github.com/StephenRicher/pyTemplate',
-    scripts = ['bin/pyTemplateBath'],
-    python_requires = '>=3.6.0',
-    install_requires = ['pyCommonTools>=1.2.1'],
-    license = 'MIT',
-    classifiers = [
-        'Development Status :: 3 - Alpha',
+    name='pyTemplateBath',
+    author='Stephen Richer',
+    author_email='sr467@bath.ac.uk',
+    url='https://github.com/StephenRicher/pyTemplateBath',
+    scripts=['bin/pyTemplateBath'],
+    python_requires='>=3.6.0',
+    install_requires=['pyCommonTools>=1.3'],
+    license='MIT',
+    classifiers=[
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Programming Language :: Python :: 3.6',
         'Natural Language :: English',
     ],
-    version = get_info()['__version__'],
-    description = __doc__,
-    long_description = read('README.md'),
-    long_description_content_type = 'text/markdown',
-    packages = find_namespace_packages(where = 'src'),
+    version=get_info()['__version__'],
+    description=__doc__,
+    long_description=read('README.md'),
+    long_description_content_type='text/markdown',
+    packages=find_namespace_packages(where='src'),
     package_dir={'': 'src'},
-    zip_safe = False,
+    zip_safe=False,
     cmdclass={
         'upload': UploadCommand,
     }

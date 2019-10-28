@@ -1,7 +1,7 @@
 import pyTemplateBath as tb
-import pyCommonTools as pct
-import pytest
 from pyCommonTools import datadir
+import pytest
+
 
 def test_hello_world(capsys):
     

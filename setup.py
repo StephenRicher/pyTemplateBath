@@ -69,7 +69,7 @@ setup(
     url = 'https://github.com/StephenRicher/pyTemplate',
     scripts = ['bin/pyTemplateBath'],
     python_requires = '>=3.6.0',
-    install_requires = ['pyCommonTools'],
+    install_requires = ['pyCommonTools>=1.1'],
     license = 'MIT',
     classifiers = [
         'Development Status :: 3 - Alpha',
@@ -86,4 +86,7 @@ setup(
     packages = find_namespace_packages(where = 'src'),
     package_dir={'': 'src'},
     zip_safe = False,
+    cmdclass={
+        'upload': UploadCommand,
+    }
 )

@@ -1,5 +1,6 @@
 import pytest
 import pyTemplateBath as tb
+from pyCommonTools import create_logger
 from pyCommonTools import datadir
 
 def test_hello_world(capsys):

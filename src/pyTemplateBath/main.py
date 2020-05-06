@@ -3,37 +3,41 @@
 """ Basic command line tool for Hello World. """
 
 import pyTemplateBath as tb
+from pyTemplateBath._version import __version__
 import pyCommonTools as pct
-import sys
 import argparse
 import logging
 
-
 def main():
 
-    epilog = 'Stephen Richer, University of Bath, Bath, UK (sr467@bath.ac.uk)'
+    parser = pct.make_parser(prog='pyTemplateBath', version=__version__)
 
-    formatter_class = argparse.ArgumentDefaultsHelpFormatter
+    base_args = pct.get_base_args()
+    subparser = pct.make_subparser(parser)
+    input_arg = pct.get_in_arg()
 
-    parser = argparse.ArgumentParser(
-        prog='pyTemplateBath',
-        description=__doc__,
-        formatter_class=formatter_class,
-        epilog=epilog)
-
-    subparsers, base_parser = pct.set_subparser(parser)
+    qc_arg = argparse.ArgumentParser(add_help=False)
+    qc_arg.add_argument(
+        '--qc', metavar='FILE', help='Output file for QC statistics.')
 
     # Sub-parser
-    sub_parser = subparsers.add_parser(
+    sub_parser = subparser.add_parser(
         'hello',
         description=tb.hello.__doc__,
         help='Classic Hello World program.',
-        parents=[base_parser],
-        formatter_class=formatter_class,
-        epilog=epilog)
+        parents=[base_args],
+        epilog=parser.epilog)
     sub_parser.add_argument(
         '-n', '--name', default='World',
-        help='Provide name.')
+        help='Provide name. (default: %(default)s)')
     sub_parser.set_defaults(function=tb.hello.hello_world)
+
+    read_parser = subparser.add_parser(
+        'read',
+        description=tb.read.__doc__,
+        help='Output file.',
+        parents=[base_args, input_arg, qc_arg],
+        epilog=parser.epilog)
+    read_parser.set_defaults(function=tb.read.read)
 
     return (pct.execute(parser))

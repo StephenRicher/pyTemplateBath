@@ -4,7 +4,6 @@
 
 import pyCommonTools as pct
 
-
 def hello_world(name='World'):
 
     log = pct.create_logger()

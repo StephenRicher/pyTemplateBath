@@ -1,23 +1,33 @@
+
 import pytest
 import pyTemplateBath as tb
-from pyCommonTools import create_logger
 from pyCommonTools import datadir
 
 
-def test_hello_world(capsys):
+@pytest.mark.parametrize(
+    'expectedStdout, expectedStderr, name',
+    [('default.out', 'default.err', None),
+     ('name1.out', 'name1.err', 'Stephen')])
+def test_hello_world(expectedStdout, expectedStderr, name, datadir, capsys):
+    """ Compare stdout and stderr against expected output """
 
-    """ Compare stdout with expected value. """
+    # Run test function
+    if name is None:
+        tb.hello.hello_world()
+    else:
+        tb.hello.hello_world(name)
 
-    tb.hello.hello_world()
+    # Capture stdout/stderr of test function
     captured = capsys.readouterr()
-    assert captured.out == "Hello World.\n"
 
+    steamOutput = {'stdout': {'expected': datadir.join(expectedStdout),
+                              'observed': captured.out.splitlines(True)},
+                   'stderr': {'expected': datadir.join(expectedStderr),
+                              'observed': captured.err.splitlines(True)}}
 
-def test_data(datadir):
-
-    """ Compare line by line, with expected data file. """
-
-    expected_data = datadir.join('test.dat')
-    with open(expected_data) as f:
-        for line in ['line1', 'line2']:
-            assert f.readline().strip('\n') == line
+    for stream in ['stdout', 'stderr']:
+        expectedFile = steamOutput[stream]['expected']
+        observedOut = steamOutput[stream]['observed']
+        with open(expectedFile) as expectedOut:
+            for observedLine, expectedLine in zip(observedOut, expectedOut):
+                assert observedLine == expectedLine

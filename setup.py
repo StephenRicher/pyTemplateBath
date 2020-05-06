@@ -19,7 +19,7 @@ def read(fname):
 
 def get_info():
     info = {}
-    with open('version.py') as fp:
+    with open('src/pyTemplateBath/_version.py') as fp:
         exec(fp.read(), info)
     return info
 

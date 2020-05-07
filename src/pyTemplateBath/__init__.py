@@ -4,4 +4,3 @@ import pyTemplateBath.main
 import pyTemplateBath._version
 import pyTemplateBath.hello
 import pyTemplateBath.read
-

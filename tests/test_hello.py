@@ -1,13 +1,16 @@
 
+#!/usr/bin/env python3
+
 import pytest
 import pyTemplateBath as tb
 from pyCommonTools import datadir
 
+hello_word_params = (
+    [('default.out', 'default.err', None),
+    ('name1.out', 'name1.err', 'Stephen')])
 
 @pytest.mark.parametrize(
-    'expectedStdout, expectedStderr, name',
-    [('default.out', 'default.err', None),
-     ('name1.out', 'name1.err', 'Stephen')])
+    'expectedStdout, expectedStderr, name', hello_word_params)
 def test_hello_world(expectedStdout, expectedStderr, name, datadir, capsys):
     """ Compare stdout and stderr against expected output """
 

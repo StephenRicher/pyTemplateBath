@@ -3,10 +3,9 @@
 """ Basic command line tool for Hello World. """
 
 import pyTemplateBath as tb
-from pyTemplateBath._version import __version__
-import pyCommonTools as pct
 import argparse
-import logging
+import pyCommonTools as pct
+from ._version import __version__
 
 def main():
 

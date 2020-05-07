@@ -3,7 +3,13 @@
 """ Command line executable to run pyTemplateBath """
 
 import sys
+import logging
 import pyTemplateBath
+from timeit import default_timer as timer
 
 if __name__ == '__main__':
-    sys.exit(pyTemplateBath.main.main())
+    start = timer()
+    rc = pyTemplateBath.main.main()
+    end = timer()
+    logging.info(f'Total execution time: {end - start:.3f} seconds.')
+    sys.exit(rc)

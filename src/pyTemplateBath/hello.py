@@ -2,11 +2,9 @@
 
 """ Print Hello World."""
 
-import pyCommonTools as pct
+import logging
 
-def hello_world(name='World'):
-
-    log = pct.create_logger()
+def hello_world(name='World', **kwargs):
 
     print(f'Hello {name}.')
-    log.debug(f"Printed 'Hello {name}.'")
+    logging.debug(f"Printed 'Hello {name}.'")

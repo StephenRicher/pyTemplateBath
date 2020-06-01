@@ -3,40 +3,61 @@
 """ Basic command line tool for Hello World. """
 
 import pyTemplateBath as tb
+import sys
+import logging
 import argparse
-import pyCommonTools as pct
 from ._version import __version__
 
-def main():
 
-    parser = pct.make_parser(prog='pyTemplateBath', version=__version__)
+def parse_arguments():
 
-    base_args = pct.get_base_args()
-    subparser = pct.make_subparser(parser)
-    input_arg = pct.get_in_arg()
+    epilog='Stephen Richer, University of Bath, Bath, UK (sr467@bath.ac.uk)'
 
-    qc_arg = argparse.ArgumentParser(add_help=False)
-    qc_arg.add_argument(
-        '--qc', metavar='FILE', help='Output file for QC statistics.')
+    version = argparse.ArgumentParser(add_help=False)
+    version.add_argument(
+        '--version', action='version', version=f'%(prog)s {__version__}')
+    verbose = argparse.ArgumentParser(add_help=False)
+    verbose.add_argument(
+        '--verbose', action='store_const', const=logging.DEBUG,
+        default=logging.INFO, help='verbose logging for debugging')
 
-    # Sub-parser
-    sub_parser = subparser.add_parser(
+    parser = argparse.ArgumentParser(
+        epilog=epilog, description=__doc__, parents=[version])
+    subparser = parser.add_subparsers(
+        title='required commands',
+        description='',
+        dest='command',
+        metavar='Commands',
+        help='Description:')
+
+    hello = subparser.add_parser(
         'hello',
         description=tb.hello.__doc__,
         help='Classic Hello World program.',
-        parents=[base_args],
+        parents=[version, verbose],
         epilog=parser.epilog)
-    sub_parser.add_argument(
-        '-n', '--name', default='World',
+    hello.add_argument(
+        '--name', default='World',
         help='Provide name. (default: %(default)s)')
-    sub_parser.set_defaults(function=tb.hello.hello_world)
+    hello.set_defaults(function=tb.hello.hello_world)
 
-    read_parser = subparser.add_parser(
+    read = subparser.add_parser(
         'read',
         description=tb.read.__doc__,
         help='Output file.',
-        parents=[base_args, input_arg, qc_arg],
+        parents=[version, verbose],
         epilog=parser.epilog)
-    read_parser.set_defaults(function=tb.read.read)
+    read.add_argument(
+        'file', metavar='FILE', nargs='?', default=[],
+        help='Input file (default: stdin)')
+    read.set_defaults(function=tb.read.read)
 
-    return (pct.execute(parser))
+    args = parser.parse_args()
+    if 'function' not in args:
+        parser.print_help()
+        sys.exit()
+
+    log_format='%(asctime)s - %(levelname)s - %(funcName)s - %(message)s'
+    logging.basicConfig(level=args.verbose, format=log_format)
+
+    return args

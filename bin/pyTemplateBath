@@ -8,8 +8,10 @@ import pyTemplateBath
 from timeit import default_timer as timer
 
 if __name__ == '__main__':
+    args = pyTemplateBath.main.parse_arguments()
     start = timer()
-    rc = pyTemplateBath.main.main()
+    return_code = args.function(**vars(args))
     end = timer()
     logging.info(f'Total execution time: {end - start:.3f} seconds.')
-    sys.exit(rc)
+    logging.shutdown()
+    sys.exit(return_code)

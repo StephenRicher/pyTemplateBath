@@ -69,7 +69,7 @@ setup(
     url='https://github.com/StephenRicher/pyTemplateBath',
     scripts=['bin/pyTemplateBath'],
     python_requires='>=3.6.0',
-    install_requires=['pyCommonTools>=1.3'],
+    install_requires=[],
     license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
